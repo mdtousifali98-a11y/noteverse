@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NoteVerse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  margin:0;
+  font-family:Segoe UI;
+  background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+  color:white;
+}
+header{
+  padding:20px;
+  text-align:center;
+}
+.card{
+  background:rgba(255,255,255,0.1);
+  margin:15px;
+  padding:20px;
+  border-radius:15px;
+}
+button{
+  background:#ff9800;
+  border:none;
+  padding:10px 15px;
+  border-radius:8px;
+  font-weight:bold;
+}
+.social{
+  text-align:center;
+}
+.social a{
+  font-size:26px;
+  margin:10px;
+  color:white;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body onload="checkLogin()">
+
+<header>
+<h1>🌌 NoteVerse</h1>
+<button onclick="logout()">Logout</button>
+</header>
+
+<div class="card">
+<div id="note" style="font-size:20px"></div><br>
+<button onclick="copyNote()">Copy</button>
+<button onclick="newNote()">New</button>
+</div>
+
+<div class="social">
+<a href="https://www.facebook.com/share/17hs66ttKc/" target="_blank">📘</a>
+<a href="https://www.instagram.com/x___boy___t_o_u_s_i_f___143" target="_blank">📸</a>
+<a href="https://youtube.com/@tousif-voice92" target="_blank">▶️</a>
+<a href="https://wa.me/918250687140" target="_blank">💬</a>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
