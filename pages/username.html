@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>Stylish Username Generator – 1000+</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{margin:0;font-family:sans-serif;background:#020617;color:#fff}
+header{text-align:center;padding:20px}
+input,select{width:90%;padding:12px;margin:8px auto;display:block;border:none;border-radius:8px}
+.user-container{padding:10px}
+.user-card{background:#0f172a;padding:14px;margin:10px 0;border-radius:12px}
+button{margin-top:8px;padding:8px 14px;border:none;border-radius:6px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🔥 Stylish Username Generator</h1>
+<p>1000+ Name Styles • Copy Instantly</p>
+</header>
+
+<input type="text" id="nameInput" placeholder="✍️ Enter your name">
+<select id="styleType">
+<option value="all">All Styles</option>
+<option value="simple">Simple</option>
+<option value="attitude">Attitude</option>
+<option value="fancy">Fancy</option>
+<option value="symbol">Symbol</option>
+</select>
+
+<div id="usernameContainer" class="user-container"></div>
+
+<script>
+const styles = {
+ simple:[
+  "{name}",
+  "{name}_official",
+  "real_{name}",
+  "{name}_07",
+  "its_{name}"
+ ],
+ attitude:[
+  "king_{name}",
+  "{name}_boss",
+  "{name}_killer",
+  "badboy_{name}",
+  "{name}_attitude"
+ ],
+ fancy:[
+  "✨{name}✨",
+  "꧁༒{name}༒꧂",
+  "★{name}★",
+  "『{name}』",
+  "☬{name}☬"
+ ],
+ symbol:[
+  "{name}",
+  "•{name}•",
+  "×{name}×",
+  "彡{name}彡",
+  "乂{name}乂"
+ ]
+};
+
+const prefixes=["its","real","official","mr","iam","the","only"];
+const suffixes=["07","143","x","pro","king","boss","yt","ff"];
+
+const container=document.getElementById("usernameContainer");
+
+function generateNames(){
+ container.innerHTML="";
+ const name=document.getElementById("nameInput").value || "yourname";
+ const type=document.getElementById("styleType").value;
+ let count=0;
+
+ Object.keys(styles).forEach(cat=>{
+  if(type!=="all" && type!==cat) return;
+
+  styles[cat].forEach(pattern=>{
+   prefixes.forEach(p=>{
+    suffixes.forEach(s=>{
+     if(count<1200){
+      const uname=pattern
+       .replace("{name}",name)
+       .replace("{name}",name);
+      const finalName=${p}_${uname}_${s}.replace(/_+/g,"");
+
+      container.innerHTML+=`
+      <div class="user-card">
+       <p>${finalName}</p>
+       <button onclick="copyText(this)">Copy</button>
+      </div>`;
+      count++;
+     }
+    });
+   });
+  });
+ });
+
+ console.log("Total Usernames:",count);
+}
+
+function copyText(btn){
+ const t=btn.parentElement.querySelector("p").innerText;
+ navigator.clipboard.writeText(t);
+ btn.innerText="Copied ✓";
+ setTimeout(()=>btn.innerText="Copy",1000);
+}
+
+document.getElementById("nameInput").addEventListener("input",generateNames);
+document.getElementById("styleType").addEventListener("change",generateNames);
+
+generateNames();
+</script>
+
+</body>
+</html>
