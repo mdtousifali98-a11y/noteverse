@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>Daily Quotes – Motivational, Islamic, Life</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{margin:0;font-family:sans-serif;background:#020617;color:#fff}
+header{text-align:center;padding:20px}
+input{width:90%;padding:12px;border-radius:8px;border:none;margin:10px auto;display:block}
+.category{text-align:center}
+.category button{margin:4px;padding:8px 14px;border:none;border-radius:6px}
+.container{padding:10px}
+.card{background:#0f172a;padding:14px;margin:12px 0;border-radius:12px}
+.card p{font-size:15px;line-height:1.6}
+.actions button{margin-right:8px;padding:6px 12px;border:none;border-radius:6px}
+a{color:#38bdf8;text-decoration:none}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🌟 Daily Quotes</h1>
+<p>Motivational • Islamic • Life • Success • Sad</p>
+</header>
+
+<input type="text" id="search" placeholder="🔍 Search quotes">
+
+<div class="category">
+<button onclick="filterCat('all')">All</button>
+<button onclick="filterCat('motivational')">🔥 Motivational</button>
+<button onclick="filterCat('islamic')">🕌 Islamic</button>
+<button onclick="filterCat('life')">🌱 Life</button>
+<button onclick="filterCat('success')">🚀 Success</button>
+<button onclick="filterCat('sad')">🖤 Sad</button>
+</div>
+
+<div id="quoteContainer" class="container"></div>
+
+<div style="text-align:center;padding:15px">
+<a href="../index.html">⬅ Back to Home</a>
+</div>
+
+<script>
+const quoteTemplates={
+ motivational:[
+  "🔥 আজ না পারলে কাল পারবে",
+  "💪 কষ্টই তোমাকে শক্ত বানাবে",
+  "🚀 নিজেকে বিশ্বাস করো",
+  "🌟 হাল ছেড়ো না"
+ ],
+ islamic:[
+  "🕌 আল্লাহ সব দেখছেন",
+  "🤍 সবর করো, সময় আসবে",
+  "📿 দোয়া কখনো বৃথা যায় না",
+  "☪️ আল্লাহর উপর ভরসা রাখো"
+ ],
+ life:[
+  "🌱 জীবন মানেই শেখা",
+  "🌍 সময়ই সবচেয়ে বড় শিক্ষক",
+  "✨ ছোট সুখেই শান্তি",
+  "🍃 জীবন সহজ রাখো"
+ ],
+ success:[
+  "🏆 সফলতা ধৈর্যের ফল",
+  "📈 আজ কষ্ট, কাল সফলতা",
+  "💼 স্বপ্ন ছাড়া সফলতা নেই",
+  "🚀 চেষ্টা করলেই জয়"
+ ],
+ sad:[
+  "🖤 কিছু কষ্ট নীরব",
+  "🥀 হাসির আড়ালে ব্যথা",
+  "🌧 মনটা আজ ভারী",
+  "💔 সব কষ্ট বলা যায় না"
+ ]
+};
+
+const container=document.getElementById("quoteContainer");
+let total=0;
+
+Object.keys(quoteTemplates).forEach(cat=>{
+ for(let i=0;i<200;i++){   // 200 × 5 = 1000+
+  const text=quoteTemplates[cat][i%quoteTemplates[cat].length]+" #"+(i+1);
+  container.innerHTML+=`
+   <div class="card" data-cat="${cat}">
+    <p class="text">${text}</p>
+    <div class="actions">
+     <button onclick="copyText(this)">Copy</button>
+     <button onclick="shareText(this)">Share</button>
+    </div>
+   </div>`;
+  total++;
+ }
+});
+
+function filterCat(cat){
+ document.querySelectorAll(".card").forEach(c=>{
+  c.style.display=(cat==="all"||c.dataset.cat===cat)?"block":"none";
+ });
+}
+
+document.getElementById("search").addEventListener("keyup",e=>{
+ const v=e.target.value.toLowerCase();
+ document.querySelectorAll(".card").forEach(c=>{
+  c.style.display=c.innerText.toLowerCase().includes(v)?"block":"none";
+ });
+});
+
+function copyText(btn){
+ const t=btn.closest(".card").querySelector(".text").innerText;
+ navigator.clipboard.writeText(t);
+ btn.innerText="Copied ✓";
+ setTimeout(()=>btn.innerText="Copy",1000);
+}
+
+function shareText(btn){
+ const t=btn.closest(".card").querySelector(".text").innerText;
+ navigator.share?navigator.share({text:t}):alert("Share not supported");
+}
+
+console.log("Total Quotes:",total);
+</script>
+
+</body>
+</html>
