@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>Instagram Bio Generator – 3000+ Bio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{margin:0;font-family:sans-serif;background:#020617;color:#fff}
+header{text-align:center;padding:20px}
+input,select{width:90%;padding:12px;margin:8px auto;display:block;border:none;border-radius:8px}
+.bio-container{padding:10px}
+.bio-card{background:#0f172a;padding:14px;margin:10px 0;border-radius:12px}
+button{padding:8px 14px;border:none;border-radius:6px}
+.copy-btn{margin-top:8px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🔥 Instagram Bio Generator</h1>
+<p>3000+ Stylish Bio • Auto Generate</p>
+</header>
+
+<input type="text" id="nameInput" placeholder="✍️ Enter your name">
+<select id="category">
+<option value="all">All Categories</option>
+<option value="attitude">😎 Attitude</option>
+<option value="love">❤️ Love</option>
+<option value="sad">🖤 Sad</option>
+<option value="islamic">🕌 Islamic</option>
+<option value="motivational">🔥 Motivational</option>
+</select>
+
+<div id="bioContainer" class="bio-container"></div>
+
+<script>
+const bioData = {
+ attitude:{
+  emoji:["😎","🔥","👑","⚡","🖤","💀"],
+  line1:["Official","Born to","Living with","Known for","Addicted to"],
+  line2:["Attitude","Silence","Confidence","Real vibes","Self respect"],
+  line3:["No fake people","No limits","No explanation","Only real","Stay classy"]
+ },
+ love:{
+  emoji:["❤️","💞","🥰","🌹","😍"],
+  line1:["Heart full of","Lost in","Believer of","Waiting for"],
+  line2:["Love","Memories","True feelings","One soul"],
+  line3:["Forever","Always","Till last breath","With loyalty"]
+ },
+ sad:{
+  emoji:["🖤","🥀","💔","😞"],
+  line1:["Smiling face","Silent boy","Broken soul","Alone"],
+  line2:["Hidden pain","Unsaid words","Fake happiness"],
+  line3:["Everyday","Inside","Still breathing"]
+ },
+ islamic:{
+  emoji:["🕌","🤲","📿","☝️"],
+  line1:["Alhamdulillah","Trusting","Living by","Following"],
+  line2:["Allah","Sabr","Deen","Dua"],
+  line3:["Always","Forever","In every step"]
+ },
+ motivational:{
+  emoji:["🔥","💪","🚀","🏆"],
+  line1:["Dream big","Never give up","Focused on","Working for"],
+  line2:["Success","Goals","Future","Growth"],
+  line3:["Everyday","Relentlessly","No matter what"]
+ }
+};
+
+const container=document.getElementById("bioContainer");
+
+function generateBios(){
+ container.innerHTML="";
+ const name=document.getElementById("nameInput").value || "Your Name";
+ const cat=document.getElementById("category").value;
+ let total=0;
+
+ Object.keys(bioData).forEach(c=>{
+  if(cat!=="all" && cat!==c) return;
+  const d=bioData[c];
+  d.emoji.forEach(e=>{
+   d.line1.forEach(l1=>{
+    d.line2.forEach(l2=>{
+     d.line3.forEach(l3=>{
+      if(total<3200){
+       container.innerHTML+=`
+       <div class="bio-card" data-category="${c}">
+        <p>${e} ${name}</p>
+        <p>${l1} ${l2}</p>
+        <p>${l3}</p>
+        <button class="copy-btn" onclick="copyBio(this)">Copy Bio</button>
+       </div>`;
+       total++;
+      }
+     });
+    });
+   });
+  });
+ });
+
+ console.log("Total Bios:",total);
+}
+
+function copyBio(btn){
+ const text=[...btn.parentElement.querySelectorAll("p")]
+ .map(p=>p.innerText).join("\n");
+ navigator.clipboard.writeText(text);
+ btn.innerText="Copied ✓";
+ setTimeout(()=>btn.innerText="Copy Bio",1000);
+}
+
+document.getElementById("nameInput").addEventListener("input",generateBios);
+document.getElementById("category").addEventListener("change",generateBios);
+
+generateBios();
+</script>
+
+</body>
+</html>
