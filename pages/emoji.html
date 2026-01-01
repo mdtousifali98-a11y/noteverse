@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>Emoji Keyboard – Copy & Share</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{margin:0;font-family:sans-serif;background:#020617;color:#fff}
+header{text-align:center;padding:20px}
+input{width:90%;padding:12px;border-radius:8px;border:none;margin:10px auto;display:block}
+.category{text-align:center}
+.category button{margin:4px;padding:8px 14px;border:none;border-radius:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(56px,1fr));gap:10px;padding:12px}
+.emoji{background:#0f172a;padding:12px;font-size:24px;text-align:center;border-radius:12px;cursor:pointer}
+.emoji:active{transform:scale(0.95)}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:#000;padding:8px 14px;border-radius:20px;display:none}
+a{color:#38bdf8;text-decoration:none}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>😎 Emoji Keyboard</h1>
+<p>Tap to Copy • Share Anywhere</p>
+</header>
+
+<input type="text" id="search" placeholder="🔍 Search emoji">
+
+<div class="category">
+<button onclick="filterCat('all')">All</button>
+<button onclick="filterCat('smile')">😄 Smile</button>
+<button onclick="filterCat('love')">❤️ Love</button>
+<button onclick="filterCat('sad')">🥀 Sad</button>
+<button onclick="filterCat('fire')">🔥 Fire</button>
+<button onclick="filterCat('islamic')">🕌 Islamic</button>
+</div>
+
+<div id="emojiGrid" class="grid"></div>
+
+<div class="toast" id="toast">Copied ✓</div>
+
+<div style="text-align:center;padding:15px">
+<a href="../index.html">⬅ Back to Home</a>
+</div>
+
+<script>
+const emojiData={
+ smile:["😀","😃","😄","😁","😆","😅","🤣","😂","😊","😇","😉","😌"],
+ love:["❤️","💖","💘","💝","💞","💕","😍","😘","🥰","💋","💑","👩‍❤️‍👨"],
+ sad:["🥀","😔","😞","😢","😭","💔","😥","😓","☹️","😩"],
+ fire:["🔥","⚡","💥","✨","🌟","🚀","💣","👑","😎","💯"],
+ islamic:["🕌","📿","☪️","🤲","🕋","🌙","🤍","🕊️"]
+};
+
+const grid=document.getElementById("emojiGrid");
+let total=0;
+
+Object.keys(emojiData).forEach(cat=>{
+ emojiData[cat].forEach(e=>{
+  grid.innerHTML+=<div class="emoji" data-cat="${cat}" onclick="copyEmoji('${e}')">${e}</div>;
+  total++;
+ });
+});
+
+function filterCat(cat){
+ document.querySelectorAll(".emoji").forEach(e=>{
+  e.style.display=(cat==="all"||e.dataset.cat===cat)?"block":"none";
+ });
+}
+
+document.getElementById("search").addEventListener("keyup",e=>{
+ const v=e.target.value;
+ document.querySelectorAll(".emoji").forEach(em=>{
+  em.style.display=em.innerText.includes(v)?"block":"none";
+ });
+});
+
+function copyEmoji(e){
+ navigator.clipboard.writeText(e);
+ const t=document.getElementById("toast");
+ t.style.display="block";
+ setTimeout(()=>t.style.display="none",1000);
+}
+
+console.log("Total Emojis:",total);
+</script>
+
+</body>
+</html>
