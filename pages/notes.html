@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<title>Instagram Notes – 2000+ Real Notes</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{margin:0;font-family:sans-serif;background:#0f172a;color:#fff}
+header{text-align:center;padding:20px}
+input{width:90%;padding:12px;border-radius:8px;border:none;margin:10px auto;display:block}
+.category-bar{text-align:center}
+.category-bar button{margin:4px;padding:8px 12px;border:none;border-radius:6px}
+.notes-container{padding:10px}
+.note-card{background:#1e293b;padding:12px;margin:10px 0;border-radius:10px}
+.note-actions button{margin-right:8px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🔥 2000+ Instagram Notes</h1>
+<p>Unique • Auto Generated • Copy Ready</p>
+</header>
+
+<input type="text" id="search" placeholder="🔍 Search notes">
+
+<div class="category-bar">
+<button onclick="filterNotes('all')">All</button>
+<button onclick="filterNotes('attitude')">😎 Attitude</button>
+<button onclick="filterNotes('love')">❤️ Love</button>
+<button onclick="filterNotes('sad')">🖤 Sad</button>
+<button onclick="filterNotes('islamic')">🕌 Islamic</button>
+<button onclick="filterNotes('motivational')">🔥 Motivational</button>
+</div>
+
+<div id="notesContainer" class="notes-container"></div>
+
+<script>
+const data = {
+ attitude:{
+  emoji:["😎","🔥","👑","💀","⚡","😏","🕶️","🖤"],
+  start:["আমি","নিজেকে","সবাই","এই দুনিয়া","আজকাল"],
+  mid:["নীরব রাখি","হালকা নেই","চিনি না","ভয় পাই না","পাত্তা দেই না"],
+  end:["কারণ আমি আসল","কারণ attitude আলাদা","কারণ শান্ত","কারণ বাস্তব","কারণ শক্ত"]
+ },
+
+ love:{
+  emoji:["❤️","💞","🥰","😍","💗","🌹","🫶"],
+  start:["তুই","ভালোবাসা","কিছু মানুষ","মনটা"],
+  mid:["খুব সহজ না","চুপচাপ থাকে","হঠাৎ আসে","আলাদা লাগে"],
+  end:["কিন্তু সত্যি","তবুও সুন্দর","আজও","সবসময়"]
+ },
+
+ sad:{
+  emoji:["🖤","🥀","🌧️","😞","💔","😔"],
+  start:["সবাই আছে","হাসি আছে","রাতগুলো","মনটা"],
+  mid:["কিন্তু শান্ত না","তবুও ফাঁকা","কথা বলে না","ভেঙে যায়"],
+  end:["ভেতরে","চুপচাপ","নীরবে","একাই"]
+ },
+
+ islamic:{
+  emoji:["🕌","🤲","📿","🤍","☝️"],
+  start:["আল্লাহ","সবর","দোয়া","ভরসা"],
+  mid:["সব জানেন","সব ঠিক করবেন","কখনো বৃথা যায় না"],
+  end:["ইনশাআল্লাহ","আলহামদুলিল্লাহ","আমিন"]
+ },
+
+ motivational:{
+  emoji:["🔥","💪","🚀","🌱","🏆"],
+  start:["আজ না পারলেও","কষ্ট","স্বপ্ন","চেষ্টা"],
+  mid:["থামবে না","শিখিয়ে দেয়","একদিন সফল হবে"],
+  end:["নিশ্চিত","একদিন","অবশ্যই"]
+ }
+};
+
+const container=document.getElementById("notesContainer");
+let total=0;
+
+Object.keys(data).forEach(cat=>{
+ const d=data[cat];
+ d.emoji.forEach(e=>{
+  d.start.forEach(s=>{
+   d.mid.forEach(m=>{
+    d.end.forEach(en=>{
+     if(total<2100){
+      container.innerHTML+=`
+      <div class="note-card" data-category="${cat}">
+       <p class="note-text">${e} ${s} ${m} ${en}</p>
+       <div class="note-actions">
+        <button onclick="copyText(this)">Copy</button>
+       </div>
+      </div>`;
+      total++;
+     }
+    });
+   });
+  });
+ });
+});
+
+function copyText(btn){
+ const t=btn.closest(".note-card").querySelector(".note-text").innerText;
+ navigator.clipboard.writeText(t);
+ btn.innerText="Copied ✓";
+ setTimeout(()=>btn.innerText="Copy",1000);
+}
+
+function filterNotes(cat){
+ document.querySelectorAll(".note-card").forEach(n=>{
+  n.style.display=(cat==="all"||n.dataset.category===cat)?"block":"none";
+ });
+}
+
+document.getElementById("search").addEventListener("keyup",e=>{
+ const v=e.target.value.toLowerCase();
+ document.querySelectorAll(".note-card").forEach(n=>{
+  n.style.display=n.innerText.toLowerCase().includes(v)?"block":"none";
+ });
+});
+
+console.log("Total Generated Notes:", total);
+</script>
+
+</body>
+</html>
