@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login | NoteVerse</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  font-family:Arial;
+  background:#0f0c29;
+  color:white;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.box{
+  background:#1c1c3c;
+  padding:25px;
+  border-radius:10px;
+  width:300px;
+}
+input,button{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:none;
+  border-radius:5px;
+}
+button{
+  background:#ff9800;
+  font-weight:bold;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>🔐 NoteVerse Login</h2>
+
+<input type="text" id="user" placeholder="Username">
+<input type="password" id="pass" placeholder="Password">
+
+<button onclick="login()">Login</button>
+<button onclick="register()">Register</button>
+
+<p id="msg"></p>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
