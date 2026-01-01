@@ -1,51 +1,62 @@
 <!DOCTYPE html>
-<html>
+<html lang="bn">
 <head>
-<title>Login | NoteVerse</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{
-  font-family:Arial;
-  background:#0f0c29;
-  color:white;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
-.box{
-  background:#1c1c3c;
-  padding:25px;
-  border-radius:10px;
-  width:300px;
-}
-input,button{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:none;
-  border-radius:5px;
-}
-button{
-  background:#ff9800;
-  font-weight:bold;
-}
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NoteVerse 🔥 Viral Notes</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<script src="data.js"></script>
+<script src="script.js" defer></script>
+<script src="search.js" defer></script>
+<script src="auto.js" defer></script>
 </head>
+
 <body>
 
-<div class="box">
-<h2>🔐 NoteVerse Login</h2>
+<header>
+  <h1>🌌 NoteVerse</h1>
+  <p>Copy • Share • Go Viral</p>
+</header>
 
-<input type="text" id="user" placeholder="Username">
-<input type="password" id="pass" placeholder="Password">
+<div class="container">
 
-<button onclick="login()">Login</button>
-<button onclick="register()">Register</button>
+<input id="searchInput" placeholder="🔍 Search note..." onkeyup="searchNote()">
 
-<p id="msg"></p>
+<div class="categories">
+  <button onclick="showCategory('attitude')">😎 Attitude</button>
+  <button onclick="showCategory('love')">❤️ Love</button>
+  <button onclick="showCategory('sad')">🖤 Sad</button>
+  <button onclick="showCategory('islamic')">🕌 Islamic</button>
+  <button onclick="showCategory('motivational')">🔥 Motivational</button>
 </div>
 
-<script src="script.js"></script>
+<div class="card">
+  <div id="note">😎 নীরবতাই আমার attitude</div>
+
+  <div class="actions">
+    <button onclick="copyNote()">📋 Copy</button>
+    <button onclick="newNote()">🔄 New</button>
+    <button onclick="shareNote()">📤 Share</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Social Menu -->
+<div class="bottom-menu">
+  <a href="https://www.facebook.com/share/17hs66ttKc/" target="_blank"><i class="fab fa-facebook"></i></a>
+  <a href="https://www.instagram.com/x___boy___t_o_u_s_i_f___143" target="_blank"><i class="fab fa-instagram"></i></a>
+  <a href="https://youtube.com/@tousif-voice92" target="_blank"><i class="fab fa-youtube"></i></a>
+  <a href="https://wa.me/918250687140" target="_blank"><i class="fab fa-whatsapp"></i></a>
+  <a href="tel:8250687140"><i class="fas fa-phone"></i></a>
+</div>
+
+<footer>
+© 2026 NoteVerse | Made by Tousif
+</footer>
+
 </body>
 </html>
